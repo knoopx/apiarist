@@ -6,7 +6,7 @@ module Apiarist
       InheritedResources::Base.inherit_resources(self)
 
       respond_to :json
-      self.responder = Responder
+      self.responder = Apiarist::ResourceController::Responder
     end
   end
 end
