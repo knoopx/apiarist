@@ -1,3 +1,5 @@
+require 'inherited_resources'
+
 module Apiarist
   autoload :AbstractController, 'apiarist/abstract_controller'
   autoload :Controller, 'apiarist/controller'
