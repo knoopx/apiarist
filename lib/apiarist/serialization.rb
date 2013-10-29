@@ -15,7 +15,11 @@ module Apiarist
 
     def serialize_object(obj, opts = {})
       opts.assert_valid_keys(:scope, :context, :serializer)
-      obj && opts.fetch(:serializer, serializer_class(obj.class)).new(obj, serialization_context, opts)
+
+      if obj
+        serializer = opts.fetch(:serializer) { serializer_class(obj.class) }
+        serializer.new(obj, serialization_context, opts)
+      end
     end
 
     def serializer_class(resource_class)
