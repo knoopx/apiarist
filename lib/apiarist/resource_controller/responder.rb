@@ -7,13 +7,15 @@ module Apiarist
       delegate :serialize, :_serialization_scope, to: :controller
 
       def display(resource, options = {})
-        if resource.respond_to?(:each)
-          root = controller.send(:resource_class).name.underscore.pluralize
-        else
-          root = controller.send(:resource_class).name.underscore
-        end
-
         super({root => serialize(resource, scope: _serialization_scope)}, options)
+      end
+
+      def root
+        if resource.respond_to?(:each)
+          controller.send(:resource_collection_name)
+        else
+          controller.send(:resource_instance_name)
+        end
       end
     end
   end
